@@ -16,6 +16,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
           echo "Creating a PR" >> notes.md
           git checkout -b $GITHUB_SHA
           git add notes.md
