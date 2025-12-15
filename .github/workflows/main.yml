@@ -11,8 +11,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Hello World
-        run: echo "Hello World"
+      - name: Create a PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Creating a PR" >> notes.md
+          git checkout -b $GITHUB_SHA
+          git add notes.md
+          git commit -m "Add notes.md"
+          git push origin $GITHUB_SHA
+          gh pr create --title "Hello World" --body "This is a test PR"
