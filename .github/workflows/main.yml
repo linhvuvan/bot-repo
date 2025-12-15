@@ -21,8 +21,7 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
 
-
-          BRANCH_NAME="ci/$(uuidgen)"
+          BRANCH_NAME="ci/${{ github.run_id }}"
 
           echo "Creating a PR in branch $BRANCH_NAME" >> notes.md
 
@@ -36,4 +35,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr merge --auto --delete-branch --squash
+          gh pr merge ci/${{ github.run_id }} --auto --delete-branch --squash
