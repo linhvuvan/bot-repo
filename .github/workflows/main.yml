@@ -24,8 +24,12 @@ jobs:
           git config --global user.email "actions@github.com"
 
           echo "Creating a PR" >> notes.md
-          git checkout -b $GITHUB_SHA
+
+          BRANCH_NAME="ci/${{ github.run_id }}"
+
+          git checkout -b $BRANCH_NAME
           git add notes.md
           git commit -m "Add notes.md"
-          git push origin $GITHUB_SHA
+          git push origin $BRANCH_NAME
+
           gh pr create --title "Hello World" --body "This is a test PR"
