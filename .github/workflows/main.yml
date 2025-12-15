@@ -35,4 +35,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr merge ci/${{ github.run_id }} --auto --delete-branch --squash
+          gh pr merge ci/${{ github.run_id }} --delete-branch --squash
